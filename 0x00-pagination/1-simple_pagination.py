@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-'''Returns page index range'''
+'''Page index range'''
 import csv
 from typing import List, Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    '''return a tuple of size two containing a start index and an end index'''
-    if page < 1:
-        return (0, 0)
-    return ((page - 1) * page_size, page * page_size)
+    '''Tuple containing a start index and an end index'''
+    start = (page - 1) * page_size
+    end = start + page_size
 
     class Server:
         """Server class to paginate a database of popular baby names"""
@@ -29,10 +28,10 @@ def index_range(page: int, page_size: int) -> Tuple[int, int]:
 
             def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
                 '''Dataset pages'''
-                assert isinstance(page, int) and page > 0
-                assert isinstance(page_size, int) and page_size > 0
+                assert type(page) == int and type(page_size) == int
+                assert page > 0 and page_size > 0
                 start, end = index_range(page, page_size)
-                try:
-                    return self.dataset()[start: end]
-                except IndexError:
+                data = self.dataset()
+                if start > len(data):
                     return []
+                return data[start:end]
