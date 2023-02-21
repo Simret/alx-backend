@@ -31,7 +31,7 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         '''Dataset pages'''
-        assert type(page) == int and type(page_size) == int
+        assert isinstance(page, int) and isinstance(page_size, int)
         assert page > 0 and page_size > 0
         start, end = index_range(page, page_size)
         data = self.dataset()
@@ -39,7 +39,7 @@ class Server:
             return []
         return data[start:end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Union[int, List, None]]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         '''Context page'''
         page_content = self.get_page(page, page_size)
         start, end = index_range(page, page_size)
