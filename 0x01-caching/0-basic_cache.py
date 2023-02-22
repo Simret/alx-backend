@@ -5,6 +5,7 @@ from base_caching import BaseCaching
 
 class BasicCache(BaseCaching):
     '''An object that allows storing and retrieving from a dictionary'''
+
     def put(self, key, item):
         '''Add item'''
         if key is None or item is None:
